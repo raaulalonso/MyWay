@@ -21,24 +21,23 @@
     </style>
 </head>
 <body style="background: linear-gradient(to top, #6E69FE, #0e0d28); min-height: 100vh; margin: 0; font-family: Jost; overflow: hidden;"></body>
-<h1 class="titulo" style="height: 0;" >Hola Jaimito.</h1>
+<h1 class="titulo" style="height: 0; color: white;" >Hola Jaimito.</h1>
 <h3 class="titulo" style="font-weight: 400;">Esta es tu ruta más habitual.</h3>
 
-<button class="button" style="z-index: 1000; background-color: #0e0d28; padding:10px 30px; font-style: normal; text-decoration: none; margin-left: 5vw; font-size: x-large; font-weight: 600; color: white;" id="openPopup">Find MyWay</button>
+<button class="button" style="z-index: 1000; background-color: #0c0b32; padding:10px 30px; font-style: normal; text-decoration: none; margin-left: 5vw; font-size: x-large; font-weight: 600;" id="openPopup">Find <span style="color: #769CFF;">My</span><span style="color: #9a48de;">Way</span></button>
 <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close-btn">&times;</span>
       <h2>Escoge tu Prioridad</h2>
-	  <div>
-		<a href=""><button class="button" style="margin-bottom: 10px;">Económica</button></a>	
+	  <div style="margin-bottom: 35px;">
+		<span id="closePopup1" class="button" >Más Rápida</span>
 	  </div>
-	  <div>
-		<a href=""><button class="button">Energética</button></a>
+	  <div style="margin-bottom: 20px;">
+		<span id="closePopup2" class="button">Económica</span>
 	  </div>
     </div>
 </div>
 
-<script src="script.js"></script>
 
 <div id="map"></div> <!-- Div donde se cargará el mapa -->
 <!-- Incluir la librería de Leaflet -->
@@ -161,10 +160,11 @@ var myIcon = L.icon({
     iconSize: [45, 45],
     iconAnchor: [22, 45],
     popupAnchor: [0, -26],
-    shadowUrl: 'my-icon-shadow.png',
     shadowSize: [68, 95],
     shadowAnchor: [22, 94]
 });
+
+
 
 L.marker([40.468961008876434, -3.703688393404534], {icon: myIcon}).addTo(map) // casa
 	.bindPopup('Casa de Jaimito', {autoClose: false, closeOnClick: false})
@@ -185,24 +185,59 @@ var antPath1 = L.polyline.antPath(latlngs1, {
         pulseColor: "#FFFFFF"  // Color de la animación ondulada
     }).addTo(map);
 
+// Seleccionamos el botón y el pop-up
+const openPopup = document.getElementById('openPopup');
+const popup = document.getElementById('popup');
+const closePopup = document.getElementById('closePopup');
+const closePopup1 = document.getElementById('closePopup1');
+const closePopup2 = document.getElementById('closePopup2');
 
-var antPath3 = L.polyline.antPath(latlngs3, {
-        color: "#6E69FE",      // Color de la línea
-        weight: 5,             // Grosor de la línea
-        opacity: 0.7,          // Opacidad
-        delay: 400,            // Velocidad de la animación (milisegundos)
-        dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
-        pulseColor: "#FFFFFF"  // Color de la animación ondulada
-    }).addTo(map);
+// Función para mostrar el pop-up
+openPopup.addEventListener('click', () => {
+  popup.classList.add('show');
+});
 
-	var antPath2 = L.polyline.antPath(latlngs2, {
-        color: "#30f050",      // Color de la línea
-        weight: 5,             // Grosor de la línea
-        opacity: 0.7,          // Opacidad
-        delay: 400,            // Velocidad de la animación (milisegundos)
-        dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
-        pulseColor: "#FFFFFF"  // Color de la animación ondulada
-    }).addTo(map);
+// Función para ocultar el pop-up
+closePopup.addEventListener('click', () => {
+	setTimeout(() => {
+		popup.classList.remove('show');
+
+	}, 600);
+  });
+
+  var antPath2 = L.polyline.antPath(latlngs2, {
+     	   color: "#30f050",      // Color de la línea
+     	   weight: 5,             // Grosor de la línea
+     	   opacity: 0.7,          // Opacidad
+     	   delay: 400,            // Velocidad de la animación (milisegundos)
+     	  dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
+      	  pulseColor: "#FFFFFF"  // Color de la animación ondulada
+   		})
+
+closePopup1.addEventListener('click', () => {
+	setTimeout(() => {
+		popup.classList.remove('show');
+		antPath2.addTo(map);
+		antPath3.remove();
+	}, 600);
+  });
+
+  var antPath3 = L.polyline.antPath(latlngs3, {
+     	   color: "#6E69FE",      // Color de la línea
+     	   weight: 5,             // Grosor de la línea
+     	   opacity: 0.7,          // Opacidad
+     	   delay: 400,            // Velocidad de la animación (milisegundos)
+     	   dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
+     	   pulseColor: "#FFFFFF"  // Color de la animación ondulada
+   		})
+
+closePopup2.addEventListener('click', () => {
+	setTimeout(() => {
+		popup.classList.remove('show');
+		antPath3.addTo(map);
+		antPath2.remove();
+	}, 600);
+});
 
 </script>
 
