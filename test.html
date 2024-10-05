@@ -21,9 +21,24 @@
     </style>
 </head>
 <body style="background: linear-gradient(to top, #6E69FE, #0e0d28); min-height: 100vh; margin: 0; font-family: Jost; overflow: hidden;"></body>
-<h1 class="titulo" style="height: 0;" >Hola Jaimito.</h1>
-<h3 class="titulo" style="font-weight: 400;">Esta es tu ruta habitual los viernes.</h3>
-<a class="button" style="background-color: #0e0d28; padding:10px 30px; font-style: normal; text-decoration: none; margin-left: 5vw; font-size: x-large; font-weight: 600; color: white;" href="">Find MyWay</a>
+<h1 class="titulo" style="height: 0; color: white;" >Hola Jaimito.</h1>
+<h3 class="titulo" style="font-weight: 400;">Esta es tu ruta más habitual.</h3>
+
+<button class="button" style="z-index: 1000; background-color: #0c0b32; padding:10px 30px; font-style: normal; text-decoration: none; margin-left: 5vw; font-size: x-large; font-weight: 600;" id="openPopup">Find <span style="color: #769CFF;">My</span><span style="color: #9a48de;">Way</span></button>
+<div id="popup" class="popup">
+    <div class="popup-content">
+      <span id="closePopup" class="close-btn">&times;</span>
+      <h2>Escoge tu Prioridad</h2>
+	  <div style="margin-bottom: 35px;">
+		<span id="closePopup1" class="button" >Más Rápida</span>
+	  </div>
+	  <div style="margin-bottom: 20px;">
+		<span id="closePopup2" class="button">Económica</span>
+	  </div>
+    </div>
+</div>
+
+
 <div id="map"></div> <!-- Div donde se cargará el mapa -->
 <!-- Incluir la librería de Leaflet -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -31,108 +46,5 @@
 <script>
 	
 
-var map = L.map('map').setView([40.4639193168351, -3.7049425732423233], 14);
-var latlngs1 = [
-    [40.468961008876434, -3.703688393404534], //casa de jaimito
-    [40.468622484967135, -3.703836720544411],
-	[40.46737181239393, -3.7051593042083204],
-    [40.465759068596704, -3.700524080761492],
-	[40.46490331127875, -3.6963832812293194],
-    [40.464345210642875, -3.6955237216543875],
-	[40.46399141337825, -3.696259923701317], // mercadona
-	[40.460579455531715, -3.69824910807756],
-    [40.457518185562904, -3.7014683218498794],
-	[40.45238042959719, -3.703223206022301],
-    [40.4524177926663, -3.7088698049063735],
-	[40.45217493238904, -3.7094099142441133],
-	[40.45256724478498, -3.7133134330537114], // gym
-	[40.45727481482375, -3.7115212516299585],
-	[40.46429819508922, -3.706390211366942],
-	[40.465034642562735, -3.7071072044284],
-	[40.46656861969209, -3.7047979540272156],
-	[40.46855487136029, -3.7027127353400955],
-	[40.469007177893275, -3.703669178565219] // vuelta a casa
-];
-
-
-var latlngs3 = [
-    [40.46908455323033, -3.7037610949041855], //casa de jaimito
-	[40.46894063727724, -3.703471027101668],
-	[40.46739591996115, -3.7050853174808958],
-	[40.46673955686414, -3.7033410982178414],
-	[40.46512311936701, -3.7043326143452155],
-	[40.463829941360046, -3.7045450820867956],
-	[40.46432835666426, -3.7063687634093525],
-	[40.463358463978224, -3.707289456946119],
-	[40.461230039361226, -3.708953787588497],
-	[40.46062383008172, -3.7092724891263824],
-	[40.45771394966092, -3.711255521381131],
-	[40.45520811822632, -3.712972968848576],
-	[40.45306596249087, -3.713150025299893], // gimnasio
-	[40.452527044584016, -3.711645045554986],
-	[40.45221029365506, -3.7094821073361324],
-	[40.456478978687684, -3.704870598939748],
-	[40.457507748744725, -3.7015394052310255],
-	[40.46053884756967, -3.6983609001644457],
-	[40.46399141337825, -3.696259923701317], // mercadona
-	[40.46426010330096, -3.6956978130433566],
-	[40.46474734099194, -3.694505917931603],
-	[40.465491725061774, -3.695626655077561],
-	[40.46786016494521, -3.6977436030199264],
-	[40.469010519895996, -3.699077813907972],
-	[40.469779758605895, -3.6997381242342784],
-	[40.47044288785186, -3.7007165455521784],
-	[40.46934669107404, -3.701730545827093],
-	[40.46996922477291, -3.7027267566235005],
-	[40.46903542206055, -3.7035806515918486] // vuelta a casa
-];
-
-
-var polyline = L.polyline(latlngs1, {color: 'red'}).addTo(map);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-var myIcon = L.icon({
-    iconUrl: 'logo/iconMarker.png',
-    iconSize: [45, 45],
-    iconAnchor: [22, 45],
-    popupAnchor: [0, -26],
-    shadowUrl: 'my-icon-shadow.png',
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
-});
-
-L.marker([40.468961008876434, -3.703688393404534], {icon: myIcon}).addTo(map) // casa
-	.bindPopup('Casa de Jaimito', {autoClose: false, closeOnClick: false})
-	.openPopup()
-L.marker([40.46399141337825, -3.696259923701317], {icon: myIcon}).addTo(map) // mercadona
-	.bindPopup('Mercadona', {autoClose: false, closeOnClick: false})
-	.openPopup()
-L.marker([40.45256724478498, -3.7133134330537114], {icon: myIcon}).addTo(map) // gimnasio
-	.bindPopup('Gimnasio', {autoClose: false, closeOnClick: false})
-	.openPopup()
-
-var antPath1 = L.polyline.antPath(latlngs1, {
-        color: "#f94646",      // Color de la línea
-        weight: 5,             // Grosor de la línea
-        opacity: 0.7,          // Opacidad
-        delay: 400,            // Velocidad de la animación (milisegundos)
-        dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
-        pulseColor: "#FFFFFF"  // Color de la animación ondulada
-    }).addTo(map);
-
-
-var antPath3 = L.polyline.antPath(latlngs3, {
-        color: "#6E69FE",      // Color de la línea
-        weight: 5,             // Grosor de la línea
-        opacity: 0.7,          // Opacidad
-        delay: 400,            // Velocidad de la animación (milisegundos)
-        dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
-        pulseColor: "#FFFFFF"  // Color de la animación ondulada
-    }).addTo(map);
-
-</script>
-
-</body>
-</html>
+var map = L.map('map', {
+	zoomControl: false,
