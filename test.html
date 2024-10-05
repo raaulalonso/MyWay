@@ -54,6 +54,7 @@ var latlngs1 = [
 	[40.469007177893275, -3.703669178565219] // vuelta a casa
 ];
 
+
 var latlngs3 = [
     [40.46908455323033, -3.7037610949041855], //casa de jaimito
 	[40.46894063727724, -3.703471027101668],
@@ -120,6 +121,7 @@ var antPath1 = L.polyline.antPath(latlngs1, {
         dashArray: [10, 20],   // Patrón de la animación (longitud de las líneas y espacios)
         pulseColor: "#FFFFFF"  // Color de la animación ondulada
     }).addTo(map);
+
 
 var antPath3 = L.polyline.antPath(latlngs3, {
         color: "#6E69FE",      // Color de la línea
