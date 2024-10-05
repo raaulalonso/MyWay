@@ -22,14 +22,19 @@
 </head>
 <body style="background: linear-gradient(to top, #6E69FE, #0e0d28); min-height: 100vh; margin: 0; font-family: Jost; overflow: hidden;"></body>
 <h1 class="titulo" style="height: 0;" >Hola Jaimito.</h1>
-<h3 class="titulo" style="font-weight: 400;">Esta es tu ruta habitual los viernes.</h3>
+<h3 class="titulo" style="font-weight: 400;">Esta es tu ruta más habitual.</h3>
 
 <button class="button" style="z-index: 1000; background-color: #0e0d28; padding:10px 30px; font-style: normal; text-decoration: none; margin-left: 5vw; font-size: x-large; font-weight: 600; color: white;" id="openPopup">Find MyWay</button>
 <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close-btn">&times;</span>
-      <h2>Este es un Pop-up</h2>
-      <p>Contenido del pop-up que aparece deslizándose desde abajo.</p>
+      <h2>Escoge tu Prioridad</h2>
+	  <div>
+		<a href=""><button class="button" style="margin-bottom: 10px;">Económica</button></a>	
+	  </div>
+	  <div>
+		<a href=""><button class="button">Energética</button></a>
+	  </div>
     </div>
 </div>
 
@@ -42,7 +47,10 @@
 <script>
 	
 
-var map = L.map('map').setView([40.4639193168351, -3.7049425732423233], 14);
+var map = L.map('map', {
+	zoomControl: false,
+	attributionControl: false
+}).setView([40.4639193168351, -3.7049425732423233], 14);
 var latlngs1 = [
     [40.468961008876434, -3.703688393404534], //casa de jaimito
     [40.468622484967135, -3.703836720544411],
@@ -73,7 +81,7 @@ var latlngs2 = [
     [40.46492689974899, -3.696456891584904],
     [40.46434144350312, -3.695500820839472],
     [40.46413058357817, -3.695894491629683],
-	  [40.46399141337825, -3.696259923701317], // mercadona
+	[40.46399141337825, -3.696259923701317], // mercadona
     [40.46223320797405, -3.6975768671437788],
     [40.46057624127511, -3.6983813784010557],
     [40.458685124324084, -3.7003883538672455],
