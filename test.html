@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruta personalizada con Leaflet</title>
+	<link rel="stylesheet" href="https://use.typekit.net/rlj8psv.css">
 
+	<link rel="stylesheet" href="css/styles.css">
     <!-- Incluir el CSS de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <style>
         /* Establecer el tamaño del mapa */
         #map {
-            height: 500px; /* Ajusta el tamaño del mapa */
-            width: 100%;
+			
+			border-radius: 20px;
+			width: 88vw;
+			margin: 3vh;
+			height: 50vh;
         }
     </style>
 </head>
-<body style="background-color: #6E69Fe;">
+<body style="background: linear-gradient(to top, #6E69FE, #0e0d28); min-height: 100vh; margin: 0; font-family: Jost;">
 
+<h1 class="titulo" >Hola Jaimito.</h1>
 <div id="map"></div> <!-- Div donde se cargará el mapa -->
 <!-- Incluir la librería de Leaflet -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -25,7 +31,7 @@
 <script>
 	
 
-var map = L.map('map').setView([40.464255969973365, -3.6978384363647883], 15);
+var map = L.map('map').setView([40.4639193168351, -3.7049425732423233], 14);
 var latlngs = [
     [40.468961008876434, -3.703688393404534], //casa de jaimito
     [40.468622484967135, -3.703836720544411],
@@ -51,13 +57,19 @@ var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-map.fitBounds(polyline.getBounds());
+
 L.marker([40.468961008876434, -3.703688393404534]).addTo(map) // casa
+	.bindPopup('Casa de Jaimito', {autoClose: false, closeOnClick: false})
+	.openPopup()
 L.marker([40.46399141337825, -3.696259923701317]).addTo(map) // mercadona
-L.marker([40.45256724478498, -3.7133134330537114]).addTo(map) // vuelta a casa
+	.bindPopup('Mercadona', {autoClose: false, closeOnClick: false})
+	.openPopup()
+L.marker([40.45256724478498, -3.7133134330537114]).addTo(map) // gimnasio
+	.bindPopup('Gimnasio', {autoClose: false, closeOnClick: false})
+	.openPopup()
 
 var antPath = L.polyline.antPath(latlngs, {
-        color: "#FF0000",      // Color de la línea
+        color: "#6E69Fe",      // Color de la línea
         weight: 5,             // Grosor de la línea
         opacity: 0.7,          // Opacidad
         delay: 400,            // Velocidad de la animación (milisegundos)

@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.titulo {
+	color: white;
+	height: 35vh;
+	padding-left: 5vw;
+	padding-top: 5vh;
+}
+
 .hstack {
 	display: flex;
 	flex-direction: row;
@@ -13,8 +22,9 @@
 }
 
   .button {
+	font-size: x-large;
 	position: relative;
-	padding: 10px 22px;
+	padding: 10px 40px;
 	border-radius: 15px;
 	border: none;
 	color: #fff;
@@ -104,4 +114,7 @@
 		110% 10%;
 	  background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
 	}
+}
+
+#map {
 }
