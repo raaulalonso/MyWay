@@ -92,13 +92,23 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.marker([40.468961008876434, -3.703688393404534]).addTo(map) // casa
+var myIcon = L.icon({
+    iconUrl: 'path',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+});
+
+L.marker([40.468961008876434, -3.703688393404534], {icon: myIcon}).addTo(map) // casa
 	.bindPopup('Casa de Jaimito', {autoClose: false, closeOnClick: false})
 	.openPopup()
-L.marker([40.46399141337825, -3.696259923701317]).addTo(map) // mercadona
+L.marker([40.46399141337825, -3.696259923701317], {icon: myIcon}).addTo(map) // mercadona
 	.bindPopup('Mercadona', {autoClose: false, closeOnClick: false})
 	.openPopup()
-L.marker([40.45256724478498, -3.7133134330537114]).addTo(map) // gimnasio
+L.marker([40.45256724478498, -3.7133134330537114], {icon: myIcon}).addTo(map) // gimnasio
 	.bindPopup('Gimnasio', {autoClose: false, closeOnClick: false})
 	.openPopup()
 
