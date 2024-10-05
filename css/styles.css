@@ -2,7 +2,7 @@
 
 .titulo {
 	color: white;
-	height: 25vh;
+	height: 22vh;
 	padding-left: 5vw;
 	padding-top: 5vh;
 }
@@ -24,12 +24,12 @@
   .button {
 	font-size: x-large;
 	position: relative;
-	padding: 10px 40px;
+	padding: 10px 80px;
 	border-radius: 15px;
 	border: none;
 	color: #fff;
 	cursor: pointer;
-	background-color: #7d2ae8;
+	background-color: #28257d;
 	transition: all 0.2s ease;
   }
   
