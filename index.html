@@ -1,11 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MyWay</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta personalizada con Leaflet</title>
+
+    <!-- Incluir el CSS de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Establecer el tamaño del mapa */
+        #map {
+            height: 500px; /* Ajusta el tamaño del mapa */
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-	<h1>Hola</h1>
+
+<div id="map"></div> <!-- Div donde se cargará el mapa -->
+
+<!-- Incluir la librería de Leaflet -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Inicializar el mapa centrado en un punto específico
+    var map = L.map('map').setView([40.4168, -3.7038], 13); // Madrid, España
+
+    // Agregar las teselas de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Coordenadas de ejemplo para una ruta (podrías personalizarlas)
+    var routeCoordinates = [
+        [40.4168, -3.7038],  // Punto de inicio en Madrid
+        [40.4188, -3.7075],  // Un punto en la ruta
+        [40.4195, -3.7110],  // Otro punto en la ruta
+        [40.4200, -3.7140],  // Y así sucesivamente...
+        [40.4218, -3.7172],  // Punto de llegada
+    ];
+
+    // Dibujar la ruta con una polilínea
+    var route = L.polyline(routeCoordinates, {
+        color: 'blue',   // Color de la línea
+        weight: 5,       // Grosor de la línea
+        opacity: 0.7,    // Opacidad de la línea
+        smoothFactor: 1  // Suavizado de la línea
+    }).addTo(map);
+
+    // Centrar el mapa en la ruta dibujada
+    map.fitBounds(route.getBounds());
+
+    // Opcional: Marcadores en puntos clave de la ruta
+    var startMarker = L.marker([40.4168, -3.7038]).addTo(map)
+        .bindPopup('Inicio de la ruta en Madrid')
+        .openPopup();
+
+    var endMarker = L.marker([40.4218, -3.7172]).addTo(map)
+        .bindPopup('Final de la ruta');
+</script>
+
 </body>
 </html>
