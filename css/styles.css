@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 button {
 	padding: 10px 20px;
 	font-size: 16px;
@@ -51,7 +50,7 @@ button {
 
 .titulo {
 	color: white;
-	height: 16vh;
+	height: 14vh;
 	padding-left: 5vw;
 	padding-top: 5vh;
 }
