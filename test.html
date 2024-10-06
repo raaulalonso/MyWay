@@ -22,7 +22,8 @@
 </head>
 <body style="background: linear-gradient(to top, #6E69FE, #0e0d28); min-height: 100vh; margin: 0; font-family: Jost; overflow: hidden;"></body>
 <h1 class="titulo" style="height: 0; color: white;" >Hola Jaimito.</h1>
-<h3 class="titulo" style="font-weight: 400;">Esta es tu ruta más habitual.</h3>
+<h3 class="titulo" style="font-weight: 400; height: 0;">Esta es tu ruta en coche más habitual.</h3>
+<h3 id="subsubtitle" class="titulo" style="font-weight: 400; padding-top: 11px;"></h3>
 
 <div style="display: flex; margin: 5vw; flex-wrap: nowrap;">
 	<button class="button" style="z-index: 1000; background-color: #0c0b32; font-style: normal; text-decoration: none; font-size: x-large; font-weight: 600;" id="openPopup">Find <span style="color: #769CFF;">My</span><span style="color: #9a48de;">Way</span></button>
@@ -33,11 +34,11 @@
     <div class="popup-content">
       <span id="closePopup" class="close-btn">&times;</span>
       <h2>Escoge tu Prioridad</h2>
-	  <div style="margin-bottom: 35px;">
+	  <div style="margin-bottom: 35px; margin-top: 30px;">
 		<span id="closePopup1" class="button" style="padding: 10px 70px;" >Más Rápida</span>
 	  </div>
 	  <div style="margin-bottom: 20px;">
-		<span id="closePopup2" class="button" style="padding: 10px 70px;">Económica</span>
+		<span id="closePopup2" class="button" style="padding: 10px 50px;">Más Económica</span>
 	  </div>
     </div>
 </div>
@@ -197,6 +198,10 @@ var antPath1 = L.polyline.antPath(latlngs1, {
         pulseColor: "#FFFFFF"  // Color de la animación ondulada
     }).addTo(map);
 
+var path1 = L.polyline(latlngs1, {
+	color: "#ff9a9a",
+});
+
 // Seleccionamos el botón y el pop-up
 const openPopup = document.getElementById('openPopup');
 const popup = document.getElementById('popup');
@@ -207,6 +212,8 @@ const closePopup2 = document.getElementById('closePopup2');
 // Seleccionamos el botón y el pop-up Stats
 const popupStats = document.getElementById('popupStats');
 const closePopup3 = document.getElementById('closePopup3');
+const subsubtitle = document.getElementById('subsubtitle');
+
 
 // Función para mostrar el pop-up
 openPopup.addEventListener('click', () => {
@@ -217,7 +224,6 @@ openPopup.addEventListener('click', () => {
 closePopup.addEventListener('click', () => {
 	setTimeout(() => {
 		popup.classList.remove('show');
-
 	});
   });
 
@@ -235,7 +241,7 @@ closePopup3.addEventListener('click', () => {
   });
 
   var antPath2 = L.polyline.antPath(latlngs2, {
-     	   color: "#30f050",      // Color de la línea
+     	   color: "#6E69FE",      // Color de la línea
      	   weight: 5,             // Grosor de la línea
      	   opacity: 0.7,          // Opacidad
      	   delay: 400,            // Velocidad de la animación (milisegundos)
@@ -247,6 +253,9 @@ closePopup1.addEventListener('click', () => {
 	setTimeout(() => {
 		popup.classList.remove('show');
 		antPath2.addTo(map);
+		antPath1.remove();
+		path1.addTo(map);
+		subsubtitle.innerText = "Esta nueva ruta es la más rápida."
 		antPath3.remove();
 	}, 600);
   });
@@ -260,13 +269,18 @@ closePopup1.addEventListener('click', () => {
      	   pulseColor: "#FFFFFF"  // Color de la animación ondulada
    		})
 
+
 closePopup2.addEventListener('click', () => {
 	setTimeout(() => {
 		popup.classList.remove('show');
 		antPath3.addTo(map);
+		antPath1.remove();
+		path1.addTo(map);
+		subsubtitle.innerText = "Esta nueva ruta es la más económica."
 		antPath2.remove();
 	}, 600);
 });
+
 
 closePopup3.addEventListener('click', () => {
 	setTimeout(() => {
